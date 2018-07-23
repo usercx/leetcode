@@ -1,14 +1,14 @@
 var solution = function(isBadVersion) {
-  /**
-   * @param {integer} n Total versions
-   * @return {integer} The first bad version
-   */
   return function(n) {
-    for(var i = 1; i <= n; i++){
-      if(isBadVersion(i)){
-        break;
+    let left = 1, right = n;
+    while(left < right){
+      let z = parseInt((left + right) / 2);
+      if(isBadVersion(z)){
+        right = z - 1;
+      } else {
+        left = z + 1;
       }
     }
-    return i;
+    return isBadVersion(left) ? left : left + 1;
   };
 };
